@@ -55,7 +55,7 @@ export const login = async (req: Request, res: Response) => {
 
     try {
         const existeUsuario = await userModel.findOne({ email })
-        console.log(existeUsuario)
+
 
         if (!existeUsuario) {
             return res.status(401).json({ message: "Esta cuenta no esta registrada" })
@@ -91,11 +91,11 @@ export const login = async (req: Request, res: Response) => {
 export const perfil = async (req: any, res: Response) => {
 
 
-    const usuario = await userModel.findOne(req.usuarioId, { password: 0 })
+    const usuarioRegistado = await userModel.findOne(req.usuarioId, { password: 0 })
 
 
-    if (!usuario) return res.status(404).json({ message: "No se encontro el pefil" })
+    if (!usuarioRegistado) return res.status(404).json({ message: "No se encontro el pefil" })
 
-    res.send(usuario)
+    res.status(200).json({ message: "Perfil del usuario", usuarioRegistado })
 
 }

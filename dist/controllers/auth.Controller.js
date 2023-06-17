@@ -41,7 +41,6 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     try {
         const existeUsuario = yield UserModels_1.userModel.findOne({ email });
-        console.log(existeUsuario);
         if (!existeUsuario) {
             return res.status(401).json({ message: "Esta cuenta no esta registrada" });
         }
@@ -65,10 +64,10 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.login = login;
 const perfil = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const usuario = yield UserModels_1.userModel.findOne(req.usuarioId, { password: 0 });
-    if (!usuario)
+    const usuarioRegistado = yield UserModels_1.userModel.findOne(req.usuarioId, { password: 0 });
+    if (!usuarioRegistado)
         return res.status(404).json({ message: "No se encontro el pefil" });
-    res.send(usuario);
+    res.status(200).json({ message: "Perfil del usuario", usuarioRegistado });
 });
 exports.perfil = perfil;
 //# sourceMappingURL=auth.Controller.js.map
