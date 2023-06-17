@@ -17,7 +17,6 @@ _____________________________________________________________________
  4|Skills `typescript - express - mongoDB - bcrypt - jsonWebToken - node - morgan - nodemon -dotenv`.
  
     
-  > la base de datos esta en `mongoDB atlas`.
 
 ______________________________________________________________________________________________________________________
   `Variables de entorno: .env`  
