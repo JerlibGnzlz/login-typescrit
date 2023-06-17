@@ -13,6 +13,8 @@ _____________________________________________________________________
  2|hacer `npm i` para que se instalen todas las dependencias.
  
  3|scripts para correr la aplicacion: `npm run dev`.
+
+ 4|Skills `typescript - express - mongoDB - bcrypt - jsonWebToken - node - morgan - nodemon -dotenv`.
  
     
   > la base de datos esta en `mongoDB atlas`.
@@ -62,5 +64,6 @@ TOKEN=
 
 
 ![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/d015b4e1-c559-4675-b0d2-7710c5c038ef)
+
 
 
