@@ -64,10 +64,15 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.login = login;
 const perfil = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const usuarioRegistado = yield UserModels_1.userModel.findOne(req.usuarioId, { password: 0 });
-    if (!usuarioRegistado)
-        return res.status(404).json({ message: "No se encontro el pefil" });
-    res.status(200).json({ message: "Perfil del usuario", usuarioRegistado });
+    try {
+        const usuarioRegistado = yield UserModels_1.userModel.findOne(req.usuarioId, { password: 0 });
+        if (!usuarioRegistado)
+            return res.status(404).json({ message: "No se encontro el pefil" });
+        res.status(200).json({ message: "Perfil del usuario", usuarioRegistado });
+    }
+    catch (error) {
+        console.log(error);
+    }
 });
 exports.perfil = perfil;
 //# sourceMappingURL=auth.Controller.js.map
