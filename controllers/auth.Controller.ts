@@ -2,16 +2,26 @@ import { Response, Request } from "express"
 import { userModel } from "../models/UserModels"
 import { passwordHashado, passwordCorrecto } from '../helpers/bcrypt';
 import { generarToken } from "../helpers/token";
-
-
+import { validationResult } from "express-validator";
 
 
 
 export const auth = async (req: Request, res: Response) => {
 
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+
     const { nombre, email, password } = req.body
 
     try {
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ message: 'El correo electrónico no es válido ' });
+        }
+
+        if (password.length < 6) {
+            return res.status(400).json({ message: 'La contraseña debe tener un minimo de 6 caracteres' });
+        }
+
         if (!nombre || !email || !password) {
             return res.status(400).json({ message: "Todos los campos son requeridos" })
         }
@@ -60,6 +70,7 @@ export const login = async (req: Request, res: Response) => {
         if (!existeUsuario) {
             return res.status(401).json({ message: "Esta cuenta no esta registrada" })
         }
+
 
         const passwordEncriptado = existeUsuario.password
 
