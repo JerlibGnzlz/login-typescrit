@@ -2,20 +2,19 @@ import { Response, Request } from "express"
 import { userModel } from "../models/UserModels"
 import { passwordHashado, passwordCorrecto } from '../helpers/bcrypt';
 import { generarToken } from "../helpers/token";
-import { validationResult } from "express-validator";
 
 
 
 export const auth = async (req: Request, res: Response) => {
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
+    const regexGmail = /@gmail\.com$/i;
 
     const { nombre, email, password } = req.body
 
     try {
-        if (!emailRegex.test(email)) {
-            return res.status(400).json({ message: 'El correo electrónico no es válido ' });
+        if (!emailRegex.test(email) || !regexGmail.test(email)) {
+            return res.status(400).json({ message: 'El correo electrónico no es válido' });
         }
 
         if (password.length < 6) {
