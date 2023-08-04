@@ -15,10 +15,11 @@ const bcrypt_1 = require("../helpers/bcrypt");
 const token_1 = require("../helpers/token");
 const auth = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const regexGmail = /@gmail\.com$/i;
     const { nombre, email, password } = req.body;
     try {
-        if (!emailRegex.test(email)) {
-            return res.status(400).json({ message: 'El correo electrónico no es válido ' });
+        if (!emailRegex.test(email) || !regexGmail.test(email)) {
+            return res.status(400).json({ message: 'El correo electrónico no es válido' });
         }
         if (password.length < 6) {
             return res.status(400).json({ message: 'La contraseña debe tener un minimo de 6 caracteres' });
