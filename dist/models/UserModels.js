@@ -10,14 +10,14 @@ const userSchema = new mongoose_1.Schema({
         lowercase: true
     }, email: {
         type: String,
-        require: true,
+        require: [true, "Ingresa un email"],
         unique: true,
         trim: true,
         lowercase: true
     },
     password: {
         type: String,
-        require: true
+        require: [true, "Ingresa un password"],
     }
 }, {
     versionKey: false,
