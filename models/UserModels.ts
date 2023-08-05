@@ -14,7 +14,7 @@ const userSchema = new Schema(
 
         }, email: {
             type: String,
-            require: true,
+            require: [true, "Ingresa un email"],
             unique: true,
             trim: true,
             lowercase: true
@@ -22,7 +22,8 @@ const userSchema = new Schema(
         ,
         password: {
             type: String,
-            require: true
+            require: [true, "Ingresa un password"],
+
 
         }
     },

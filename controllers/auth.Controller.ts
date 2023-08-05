@@ -8,22 +8,41 @@ import { generarToken } from "../helpers/token";
 export const auth = async (req: Request, res: Response) => {
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const regexGmail = /@gmail\.com$/i;
+    const dominiosPermitidos = ['gmail.com', 'hotmail.com', "yahoo.com", "yahoo.es", "outlook.com", "outlook.es"];
+    const dominiosPermitidosRegex = new RegExp(`^[a-zA-Z0-9._%+-]+@(${dominiosPermitidos.join('|')})$`, 'i');
+    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_-])[A-Za-z\d@$!%*?&_-]{8,}$/;
+    const number = /[0-9]/
 
     const { nombre, email, password } = req.body
 
     try {
-        if (!emailRegex.test(email) || !regexGmail.test(email)) {
+        if (!nombre || !password) {
+            return res.status(400).json({ message: "Todos los campos son requeridos" })
+        }
+
+        if (nombre.match(number)) {
+            return res.status(400).json({ message: "Debes colocar un nombre valido" })
+        }
+
+        if (nombre.length < 3) {
+            return res.status(400).json({ message: "Debes colocar un nombre mayor a 3 caracteres " })
+        }
+
+        if (!email) {
+            return res.status(400).json({ message: 'Debe ingresar un correo' });
+        }
+
+        if (!emailRegex.test(email) || !dominiosPermitidosRegex.test(email)) {
             return res.status(400).json({ message: 'El correo electrónico no es válido' });
         }
 
-        if (password.length < 6) {
-            return res.status(400).json({ message: 'La contraseña debe tener un minimo de 6 caracteres' });
+
+        if (!regexPassword.test(password)) {
+            return res.status(400).json(
+                { message: 'La contraseña debe contener al menos 8 caracteres incluyendo: mayúsculas, minúsculas, números y caracteres especiales ( @, $, !, %, *, ?, _ , - o &.)' }
+            );
         }
 
-        if (!nombre || !email || !password) {
-            return res.status(400).json({ message: "Todos los campos son requeridos" })
-        }
 
         const existeUsuario = await userModel.findOne({ email })
 
@@ -103,7 +122,7 @@ export const perfil = async (req: any, res: Response) => {
 
     try {
 
-        const usuarioRegistado = await userModel.findOne(req.usuarioId, { password: 0 })
+        const usuarioRegistado = await userModel.findById(req.usuarioId, { password: 0 })
 
         if (!usuarioRegistado) return res.status(404).json({ message: "No se encontro el pefil" })
 
