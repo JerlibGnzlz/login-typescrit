@@ -6,9 +6,9 @@ const userSchema = new mongoose_1.Schema({
     nombre: {
         type: String,
         require: true,
-        unique: true,
         lowercase: true
-    }, email: {
+    },
+    email: {
         type: String,
         require: [true, "Ingresa un email"],
         unique: true,
@@ -18,7 +18,12 @@ const userSchema = new mongoose_1.Schema({
     password: {
         type: String,
         require: [true, "Ingresa un password"],
-    }
+    },
+    role: {
+        type: String,
+        enum: ['user', 'admin', "employed"],
+        default: 'user',
+    },
 }, {
     versionKey: false,
     timestamps: true
