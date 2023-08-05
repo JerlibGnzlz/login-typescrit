@@ -41,28 +41,29 @@ TOKEN=
 > Ruta protegida con token
 - `get` http://localhost:8000/api/perfil
 
-![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/e5221334-c6af-4ad5-b0e2-7642ed764b8b)
-
-![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/f5bc4c00-4333-44d9-b312-76eb9413fa8f)
-
-![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/58b198a8-3f7e-4012-a553-1c5dd8001fac)
-
-![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/94745780-7566-4aca-b9c1-d87850b8fe99)
-
-![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/3e086dba-e0b3-4ce6-91c6-ddfdbd772e0f)
-
-![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/acbf4f60-3725-494a-970c-2c165d794e26)
-
-![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/e6d84dd3-2037-4b83-81d5-494ffa669b6c)
-
-![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/0d97ca1b-55ef-4a17-84bc-d55acd993ae3)
+![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/394edde1-981f-48f2-94f1-af8a49857568)
 
 
+![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/6b7b8055-b96b-4cba-90a6-4c27a8d52570)
 
 
+![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/a0377941-e96a-4303-b324-41e6919e20e6)
 
 
-![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/d015b4e1-c559-4675-b0d2-7710c5c038ef)
+![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/00f0b471-4e4a-4ec2-a119-066e83bf6cff)
+
+
+![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/a2853777-f9ef-420c-b309-1ccb17700d99)
+
+
+![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/17bf6d14-6eb0-4802-b7a5-1b294fd09565)
+
+
+![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/c93fb1c1-d94e-411a-8b1d-13c9b70aec75)
+
+
+![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/f72bf96f-578d-4f30-a936-d44ac50ae3b3)
+
 
 
 
