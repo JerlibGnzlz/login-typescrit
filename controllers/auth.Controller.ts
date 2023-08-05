@@ -1,7 +1,8 @@
-import { Response, Request } from "express"
+import { Response, Request, NextFunction } from "express"
 import { userModel } from "../models/UserModels"
 import { passwordHashado, passwordCorrecto } from '../helpers/bcrypt';
 import { generarToken } from "../helpers/token";
+// import { checkRoleMiddleware } from '../middlewares/checkRole';
 
 
 
@@ -13,7 +14,7 @@ export const auth = async (req: Request, res: Response) => {
     const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_-])[A-Za-z\d@$!%*?&_-]{8,}$/;
     const number = /[0-9]/
 
-    const { nombre, email, password } = req.body
+    const { nombre, email, password, role } = req.body
 
     try {
         if (!nombre || !password) {
@@ -57,7 +58,8 @@ export const auth = async (req: Request, res: Response) => {
             {
                 nombre,
                 email,
-                password: encriptado
+                password: encriptado,
+                role
             })
 
 
@@ -122,11 +124,11 @@ export const perfil = async (req: any, res: Response) => {
 
     try {
 
-        const usuarioRegistado = await userModel.findById(req.usuarioId, { password: 0 })
+        const roleUser = await userModel.find(req.usuarioId, { password: 0 })
 
-        if (!usuarioRegistado) return res.status(404).json({ message: "No se encontro el pefil" })
+        if (!roleUser) return res.status(404).json({ message: "No se encontro el pefil" })
 
-        res.status(200).json({ message: "Perfil del usuario", usuarioRegistado })
+        res.status(200).json({ message: "Perfil del usuario", roleUser })
 
     } catch (error) {
         console.log(error)
@@ -134,3 +136,21 @@ export const perfil = async (req: any, res: Response) => {
 
 
 }
+
+
+
+// Ruta protegida que solo los usuarios con rol de 'admin' pueden acceder.
+export const admin = async (req: Request, res: Response) => {
+
+    try {
+        const roleAdmin = await userModel.find({ role: 'admin' });
+
+        if (!roleAdmin) return res.status(500).json({ message: 'No se encontro el administrador' });
+
+        res.status(200).json({ message: "Perfil del Administradores", roleAdmin });
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+}
+
+
