@@ -2,19 +2,20 @@ import { Response, Request, NextFunction } from "express"
 import { userModel } from "../models/UserModels"
 import { passwordHashado, passwordCorrecto } from '../helpers/bcrypt';
 import { generarToken } from "../helpers/token";
-// import { checkRoleMiddleware } from '../middlewares/checkRole';
 
 
 
 export const auth = async (req: Request, res: Response) => {
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    /* The `dominiosPermitidos` variable is an array that contains a list of allowed email domains.
+    These are the domains that are considered valid for user registration. */
     const dominiosPermitidos = ['gmail.com', 'hotmail.com', "yahoo.com", "yahoo.es", "outlook.com", "outlook.es"];
     const dominiosPermitidosRegex = new RegExp(`^[a-zA-Z0-9._%+-]+@(${dominiosPermitidos.join('|')})$`, 'i');
     const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_-])[A-Za-z\d@$!%*?&_-]{8,}$/;
     const number = /[0-9]/
 
-    const { nombre, email, password, role } = req.body
+    const { nombre, email, password, confirmarPassword, role } = req.body
 
     try {
         if (!nombre || !password) {
@@ -45,6 +46,11 @@ export const auth = async (req: Request, res: Response) => {
         }
 
 
+        if (regexPassword.test(password) !== regexPassword.test(confirmarPassword)) {
+            return res.status(400).json({ message: 'No coinciden las Contraseña' })
+        }
+
+
         const existeUsuario = await userModel.findOne({ email })
 
 
@@ -56,10 +62,10 @@ export const auth = async (req: Request, res: Response) => {
 
         const nuevoUsuario = new userModel(
             {
+                role,
                 nombre,
                 email,
                 password: encriptado,
-                role
             })
 
 
@@ -84,6 +90,15 @@ export const login = async (req: Request, res: Response) => {
 
 
     try {
+
+        if (!email) {
+            return res.status(400).json({ message: 'Debe ingresar un correo' });
+        }
+        if (!password) {
+            return res.status(400).json({ message: 'Debe ingresar un password' });
+        }
+
+
         const existeUsuario = await userModel.findOne({ email })
 
 
@@ -110,7 +125,7 @@ export const login = async (req: Request, res: Response) => {
 
         } else {
 
-            res.status(403).json({ message: "Clave invalida " })
+            res.status(403).json({ message: "Clave invalida intenta una vez mas" })
 
         }
 
@@ -147,10 +162,22 @@ export const admin = async (req: Request, res: Response) => {
 
         if (!roleAdmin) return res.status(500).json({ message: 'No se encontro el administrador' });
 
-        res.status(200).json({ message: "Perfil del Administradores", roleAdmin });
+        res.status(200).json({ message: ` Perfil de administradores`, roleAdmin });
     } catch (error) {
         res.status(500).json({ error });
     }
 }
 
+export const clientes = async (req: Request, res: Response) => {
+
+    try {
+        const roleAdmin = await userModel.findOneAndDelete({ role: 'admin' });
+
+        if (!roleAdmin) return res.status(500).json({ message: 'No estas autorizado' });
+
+        res.status(200).json({ message: ` Eliminados todos los`, roleAdmin });
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+}
 
