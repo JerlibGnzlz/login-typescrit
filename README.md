@@ -4,7 +4,7 @@
 
 ## :book: Informacion sobre el login 
 
-`Es un sistema de registro e inicio de usuario y ruta protegida donde al hacer inicio te llegara un token en cual tendras que colocar en la ruta privada para validar que si es el usuario que se registro y utilizando roles:admin,user,employed `
+`Es un sistema de registro e inicio de usuario y roles: admin, user, employed y rutas protegida donde al hacer inicio te llegara un token en cual tendras que colocar en la ruta privada para validar que si es el usuario que se registro `
 _____________________________________________________________________
 - ## Pasos para hacer la instalacion
  
