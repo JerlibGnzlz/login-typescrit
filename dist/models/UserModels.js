@@ -17,7 +17,11 @@ const userSchema = new mongoose_1.Schema({
     },
     password: {
         type: String,
-        require: [true, "Ingresa un password"],
+        require: [true, "Ingresa  password"],
+    },
+    confirmarPassword: {
+        type: String,
+        require: [true, "Confirmar el password"],
     },
     role: {
         type: String,
