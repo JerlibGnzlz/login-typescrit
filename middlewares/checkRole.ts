@@ -1,6 +1,4 @@
 import { NextFunction, Response } from "express";
-import jwt, { JwtPayload } from 'jsonwebtoken';
-import { userModel } from "../models/UserModels";
 
 export const isAdmin = async (req: any, res: Response, next: NextFunction) => {
 
