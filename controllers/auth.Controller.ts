@@ -149,7 +149,6 @@ export const perfil = async (req: any, res: Response) => {
         console.log(error)
     }
 
-
 }
 
 
@@ -169,14 +168,18 @@ export const admin = async (req: Request, res: Response) => {
 }
 
 
-export const clientes = async (req: Request, res: Response) => {
+export const getAllAdmin = async (req: any, res: Response) => {
 
     try {
-        const roleAdmin = await userModel.findOneAndDelete({ role: 'admin' });
+        if (req.usuario.role !== "admin") {
+            return res.status(401).json({ message: 'No estas autorizado' });
+        }
+
+        const roleAdmin = await userModel.find({ role: 'admin' });
 
         if (!roleAdmin) return res.status(500).json({ message: 'No estas autorizado' });
 
-        res.status(200).json({ message: ` Eliminados todos los`, roleAdmin });
+        res.status(200).json({ message: ` Todos los administradores`, roleAdmin });
     } catch (error) {
         res.status(500).json({ error });
     }

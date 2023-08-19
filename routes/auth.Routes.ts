@@ -1,7 +1,7 @@
 import { Router } from "express"
-import { login, perfil, auth, admin, clientes } from "../controllers/auth.Controller"
+import { login, perfil, auth, admin, getAllAdmin } from "../controllers/auth.Controller"
 import { authToken } from "../middlewares/AuthToken"
-import { checkRoleMiddleware } from "../middlewares/checkRole"
+import { isAdmin } from "../middlewares/checkRole"
 
 
 
@@ -14,9 +14,9 @@ router.post("/api/login", login)
 
 router.get("/api/perfil", authToken, perfil)
 
-router.get("/api/admin", authToken, checkRoleMiddleware("admin"), admin)
+router.get("/api/admin", authToken, getAllAdmin)
 
-router.get("/api/clientes", authToken, checkRoleMiddleware("employed"), clientes)
+// router.get("/api/clientes", authToken, IsTrainning("trainnig"), clientes)
 
 
 

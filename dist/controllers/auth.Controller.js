@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.clientes = exports.admin = exports.perfil = exports.login = exports.auth = void 0;
+exports.getAllAdmin = exports.admin = exports.perfil = exports.login = exports.auth = void 0;
 const UserModels_1 = require("../models/UserModels");
 const bcrypt_1 = require("../helpers/bcrypt");
 const token_1 = require("../helpers/token");
@@ -120,16 +120,19 @@ const admin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.admin = admin;
-const clientes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const roleAdmin = yield UserModels_1.userModel.findOneAndDelete({ role: 'admin' });
+        if (req.usuario.role !== "admin") {
+            return res.status(401).json({ message: 'No estas autorizado' });
+        }
+        const roleAdmin = yield UserModels_1.userModel.find({ role: 'admin' });
         if (!roleAdmin)
             return res.status(500).json({ message: 'No estas autorizado' });
-        res.status(200).json({ message: ` Eliminados todos los`, roleAdmin });
+        res.status(200).json({ message: ` Todos los administradores`, roleAdmin });
     }
     catch (error) {
         res.status(500).json({ error });
     }
 });
-exports.clientes = clientes;
+exports.getAllAdmin = getAllAdmin;
 //# sourceMappingURL=auth.Controller.js.map

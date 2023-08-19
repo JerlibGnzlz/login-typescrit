@@ -16,7 +16,7 @@ exports.generarToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const generarToken = (id) => __awaiter(void 0, void 0, void 0, function* () {
     return jsonwebtoken_1.default.sign({ id }, process.env.TOKEN || "CL@VE", {
-        expiresIn: "4h"
+        expiresIn: "3h"
     });
 });
 exports.generarToken = generarToken;

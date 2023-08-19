@@ -21,19 +21,21 @@ const UserModels_1 = require("../models/UserModels");
 //     exp: number
 // }
 const authToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    if (req.headers.authorization) {
-        try {
-            const token = req.headers.authorization.split(" ")[1];
-            const payload = jsonwebtoken_1.default.verify(token, process.env.TOKEN || "CL@VE");
-            const usuarioid = yield UserModels_1.userModel.findOne({ email: payload.id });
-            req.usuarioId = usuarioid;
-            return next();
+    var _a;
+    try {
+        const token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
+        console.log(token, "token");
+        if (!token) {
+            return res.status(401).json({ message: 'No se proporcionó un token de autenticación.' });
         }
-        catch (error) {
-            return res.status(400).json({ message: "Sesion o token invalido" });
-        }
+        const payload = jsonwebtoken_1.default.verify(token, process.env.TOKEN || "CL@VE");
+        const usuario = yield UserModels_1.userModel.findOne({ email: payload.id });
+        req.usuario = usuario;
+        return next();
     }
-    return next();
+    catch (error) {
+        return res.status(400).json({ message: "Sesion o token invalido" });
+    }
 });
 exports.authToken = authToken;
 //# sourceMappingURL=AuthToken.js.map
