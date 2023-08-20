@@ -4,7 +4,7 @@
 
 ## :book: Informacion sobre el login 
 
-`Es un sistema de registro e inicio de usuario y roles: admin, user, employed y rutas protegida donde al hacer inicio te llegara un token en cual tendras que colocar en la ruta privada para validar que si es el usuario que se registro `
+`Es un sistema de registro e inicio de usuario y roles: admin, client, y rutas protegida donde al hacer inicio te llegara un token en cual tendras que colocar en la ruta privada para validar que si es el usuario que se registro `
 _____________________________________________________________________
 - ## Pasos para hacer la instalacion
  
@@ -31,15 +31,15 @@ TOKEN=
 
 ## Endpoint para el registro e inicio de sesion
 
-- `post` http://localhost:8000/api/auth
+- `post` http://localhost:9000/api/auth
 
 
-- `post` http://localhost:8000/api/login
+- `post` http://localhost:9000/api/login
 
 
 ## Endpoint para verificar que si es el usuario registrado
 > Ruta protegida con token
-- `get` http://localhost:8000/api/perfil
+- `get` http://localhost:9000/api/client
 
 ![image](https://github.com/JerlibGnzlz/login-typescrit/assets/84889284/394edde1-981f-48f2-94f1-af8a49857568)
 
