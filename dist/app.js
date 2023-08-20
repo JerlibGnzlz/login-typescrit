@@ -9,14 +9,13 @@ const express_1 = __importDefault(require("express"));
 const auth_Routes_1 = __importDefault(require("./routes/auth.Routes"));
 const morgan_1 = __importDefault(require("morgan"));
 // ─── Settinng ────────────────────────────────────────────────────────────────
-const app = (0, express_1.default)();
-exports.app = app;
-// ─── Pueerto ─────────────────────────────────────────────────────────────────
-app.set("port", 8000);
+exports.app = (0, express_1.default)();
+// ─── Puerto ─────────────────────────────────────────────────────────────────
+exports.app.set("port", 8000);
 // ─── Middelware ──────────────────────────────────────────────────────────────
-app.use((0, morgan_1.default)("dev"));
-app.use(express_1.default.json());
-app.use(express_1.default.urlencoded({ extended: false }));
+exports.app.use((0, morgan_1.default)("dev"));
+exports.app.use(express_1.default.json());
+exports.app.use(express_1.default.urlencoded({ extended: false }));
 // ─── Rutas ───────────────────────────────────────────────────────────────────
-app.use(auth_Routes_1.default);
+exports.app.use(auth_Routes_1.default);
 //# sourceMappingURL=app.js.map
