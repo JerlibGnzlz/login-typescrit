@@ -1,5 +1,4 @@
-import { Document, Schema, model } from "mongoose"
-// import { IUser } from '../Interfaces/user.Interfaces';
+import { Schema, model } from "mongoose"
 
 
 export interface IUser {
