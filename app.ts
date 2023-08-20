@@ -5,10 +5,10 @@ import morgan from "morgan";
 
 
 // ─── Settinng ────────────────────────────────────────────────────────────────
-const app: Application = express()
+export const app: Application = express()
 
 
-// ─── Pueerto ─────────────────────────────────────────────────────────────────
+// ─── Puerto ─────────────────────────────────────────────────────────────────
 
 app.set("port", 8000)
 
@@ -21,14 +21,3 @@ app.use(express.urlencoded({ extended: false }))
 // ─── Rutas ───────────────────────────────────────────────────────────────────
 
 app.use(authRoutes)
-// app.use(PerfilRoutes)
-// app.use(loginRoutes)
-
-
-
-
-
-
-export {
-    app
-}

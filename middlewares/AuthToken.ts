@@ -23,6 +23,7 @@ export const authToken = async (req: any, res: Response, next: NextFunction) => 
         const payload = Jwt.verify(token, process.env.TOKEN || "CL@VE") as JwtPayload
 
         const usuario = await userModel.findOne({ email: payload.id })
+        console.log(usuario)//trae todo el objeto de usuario
 
         req.usuario = usuario
 

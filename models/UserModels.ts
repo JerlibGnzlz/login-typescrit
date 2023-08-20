@@ -1,10 +1,18 @@
-import { Schema, model } from "mongoose"
-import { IUser } from '../Interfaces/user.Interfaces';
+import { Document, Schema, model } from "mongoose"
+// import { IUser } from '../Interfaces/user.Interfaces';
 
 
+export interface IUser {
+    role: string
+    nombre: string,
+    email: string,
+    password: string,
+    confirmarPassword: string,
+    passwordHashado(password: string): Promise<string>
+    passwordCorrecto(password: string): Promise<boolean>
+}
 
-
-const userSchema = new Schema(
+const userSchema = new Schema<IUser>(
     {
         nombre: {
             type: String,

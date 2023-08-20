@@ -30,6 +30,7 @@ const authToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function
         }
         const payload = jsonwebtoken_1.default.verify(token, process.env.TOKEN || "CL@VE");
         const usuario = yield UserModels_1.userModel.findOne({ email: payload.id });
+        console.log(usuario); //trae todo el objeto de usuario
         req.usuario = usuario;
         return next();
     }
